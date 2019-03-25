@@ -14,9 +14,7 @@ if (${IS_MACOS} MATCHES 1)
     #Mac 环境
     message("oh mac os !")
 
-    set(GLFW_H /usr/local/Cellar/glfw/3.2.1/include/GLFW)
-    set(GLAD_H /usr/local/include/glad/include)
-    set(GLM_H /usr/local/include/glm)
+    set(GLFW_H /Users/caldremch/work/Code/OpenGL/core/include)
 
     find_package(OpenGL REQUIRED)
     include_directories(${OPENGL_INCLUDE_DIR})
@@ -24,7 +22,6 @@ if (${IS_MACOS} MATCHES 1)
     include_directories(${GLUT_INCLUDE_DIR})
 
     #添加目标链接
-    set(GLEW_LINK /usr/local/Cellar/glew/2.1.0/lib/libGLEW.2.1.dylib)
     set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 
     target_link_libraries(OpenGLCPP ${OPENGL_LIBRARY} ${GLEW_LINK} ${GLFW_LINK})
