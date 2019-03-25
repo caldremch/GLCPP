@@ -5,21 +5,18 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 set(IS_MACOS 1)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp)
 
 add_executable(OpenGLCPP ${SOURCE_FILES})
 
 if (${IS_MACOS} MATCHES 1)
+
+    #Mac 环境
     message("oh mac os !")
 
     set(GLFW_H /usr/local/Cellar/glfw/3.2.1/include/GLFW)
     set(GLAD_H /usr/local/include/glad/include)
     set(GLM_H /usr/local/include/glm)
-
-else ()
-    message("oh windows !")
-    set(GLFW_H D:\\MainProject\\OpenGL\\windowscore\\include)
-    set(GLAD_H D:\\ m MainProject\\OpenGL\\glad\\include)
 
     find_package(OpenGL REQUIRED)
     include_directories(${OPENGL_INCLUDE_DIR})
@@ -31,7 +28,16 @@ else ()
     set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 
     target_link_libraries(OpenGLCPP ${OPENGL_LIBRARY} ${GLEW_LINK} ${GLFW_LINK})
+
+
+else ()
+
+    #windows 环境
+    message("oh windows !")
+    set(GLFW_H D:\\MainProject\\OpenGL\\windowscore\\include)
+    set(GLAD_H D:\\MainProject\\OpenGL\\glad\\include)
+
 endif ()
 
-include_directories(${GLFW_H} ${GLAD_H})
+include_directories(${GLFW_H} ${GLAD_H} ${GLM_H})
 
