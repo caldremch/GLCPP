@@ -36,6 +36,14 @@ else ()
     message("oh windows !")
     set(GLFW_H D:\\MainProject\\OpenGL\\windowscore\\include)
     set(GLAD_H D:\\MainProject\\OpenGL\\glad\\include)
+    find_package(OpenGL REQUIRED)
+
+    target_link_libraries(
+            OpenGLCPP
+            ${OPENGL_LIBRARY}
+            #D:\\xxx\\ 会报错
+            D:/MainProject/OpenGL/windowscore/libs/libglfw3.a
+    )
 
 endif ()
 
