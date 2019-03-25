@@ -7,7 +7,7 @@ set(IS_MACOS 1)
 
 set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp)
 
-add_executable(OpenGLCPP ${SOURCE_FILES})
+add_executable(GLCPP ${SOURCE_FILES})
 
 if (${IS_MACOS} MATCHES 1)
 
@@ -24,7 +24,7 @@ if (${IS_MACOS} MATCHES 1)
     #添加目标链接
     set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 
-    target_link_libraries(OpenGLCPP ${OPENGL_LIBRARY} ${GLEW_LINK} ${GLFW_LINK})
+    target_link_libraries(GLCPP ${OPENGL_LIBRARY} ${GLEW_LINK} ${GLFW_LINK})
 
 
 else ()
@@ -36,7 +36,7 @@ else ()
     find_package(OpenGL REQUIRED)
 
     target_link_libraries(
-            OpenGLCPP
+            GLCPP
             ${OPENGL_LIBRARY}
             #D:\\xxx\\ 会报错
             D:/MainProject/OpenGL/windowscore/libs/libglfw3.a

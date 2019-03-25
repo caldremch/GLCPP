@@ -138,18 +138,44 @@ void TextureRect::use() {
 
     glm::mat4 transform = glm::mat4(1.0);
     transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-    std::cout << "角度: " <<  glfwGetTime() << std::endl;
     transform = glm::rotate(transform, (float) glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
 
     Shader::use();
 
     //get matrix's uniform location and set matrix
-    unsigned int transformLoc = glGetUniformLocation(ID, "transform");
-    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+//    unsigned int transformLoc = glGetUniformLocation(ID, "transform");
+//    glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
+
+    glm::mat4 model  = glm::mat4(1.0f);//模型矩阵
+    glm::mat4 view  = glm::mat4(1.0f);//观察矩阵
+    glm::mat4 projection  = glm::mat4(1.0f);//投影矩阵
+
+
+    model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+    view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    projection = glm::perspective(glm::radians(100.0f), 800.0f/600.0f, 0.9f, 100.0f);
+    unsigned int modelLoc = glGetUniformLocation(ID, "model");
+    unsigned int viewLoc = glGetUniformLocation(ID, "view");
+
+
+
+    setMat4("projection", projection);
+
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+
+
+
+
+
+
+
+
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+//    glDrawArrays(GL_TRIANGLES, 0, 36);
 
 
 }
