@@ -141,3 +141,15 @@ void Shader::use()
 void Shader::onRelease() {
     std::cout << "do nothing in parent" << std::endl;
 }
+
+Shader::Shader() {
+
+}
+
+void Shader::setVertexPath(GLchar *vertexPath) {
+    Shader::vertexPath = vertexPath;
+}
+
+void Shader::setFragmentPath(GLchar *fragmentPath) {
+    Shader::fragmentPath = fragmentPath;
+}

@@ -25,6 +25,13 @@ public:
 
     //构造器
     Shader(const GLchar*vertexPath, const GLchar *fragmentPath);
+    Shader();
+    GLchar*vertexPath;
+    GLchar*fragmentPath;
+
+    void setVertexPath(GLchar *vertexPath);
+
+    void setFragmentPath(GLchar *fragmentPath);
 
     //使用, 激活程序
     virtual void use();

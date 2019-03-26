@@ -6,9 +6,10 @@
 #define GLCPP_CUBE_H
 
 #include "../shader/Shader.h"
-
+#include "GLFW/glfw3.h"
 class Cube : public Shader {
 public:
+    Cube();
     Cube(const GLchar *vertexPath, const GLchar *fragmentPath);
     GLuint texture;
     GLuint texture2;
@@ -27,6 +28,8 @@ public:
             glm::vec3(1.5f, 0.2f, -1.5f),
             glm::vec3(-1.3f, 1.0f, -1.5f)
     };
+
+    void handleInput(GLFWwindow *window);
 };
 
 

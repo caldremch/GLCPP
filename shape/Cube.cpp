@@ -6,6 +6,14 @@
 #include "../utils/stb_image.h"
 #include <GLFW/glfw3.h>
 
+//camera by mouse
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
+
 Cube::Cube(const GLchar *vertexPath, const GLchar *fragmentPath) : Shader(vertexPath, fragmentPath) {
 
 
@@ -131,7 +139,7 @@ Cube::Cube(const GLchar *vertexPath, const GLchar *fragmentPath) : Shader(vertex
     glUniform1i(glGetUniformLocation(ID, "texture1"), 0);
     setInt("texture2", 1);
     glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
-    projection = glm::perspective(glm::radians(45.0f), (float) 800 / (float)600.0f, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), (float) 800 / (float) 600.0f, 0.1f, 100.0f);
     setMat4("projection", projection);
 
 }
@@ -142,12 +150,19 @@ void Cube::onRelease() {
 }
 
 void Cube::use() {
+
+
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+
     //纹理单元GL_TEXTURE0默认总是被激活
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
     Shader::use();
 
@@ -178,6 +193,9 @@ void Cube::use() {
     setMat4("view", view);
 
 
+
+    //glm::mat4 view = glm::mat4(1);
+    //view = glm::lookAt(cameraPos, (cameraPos.operator+=(cameraFront)), cameraUp);
     glBindVertexArray(VAO);
 
     for (int i = 0; i < 10; ++i) {
@@ -192,7 +210,45 @@ void Cube::use() {
 
 }
 
+void Cube::handleInput(GLFWwindow *window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        std::cout << "退出" << std::endl;
+        glfwSetWindowShouldClose(window, true);
+    }
+
+    float cameraSpeed = 2.5*deltaTime;
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        std::cout << "W 键" << std::endl;
+        cameraPos += cameraFront.operator*=(cameraSpeed) ;
+    }
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+    {
+        std::cout << "S 键" << std::endl;
+        cameraPos -= cameraFront.operator*=(cameraSpeed);
+    }
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+    {
+        std::cout << "A 键" << std::endl;
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+
+    }
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+    {
+        std::cout << "D 键" << std::endl;
+        cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+    }
+
+}
+
 void Cube::onDestroy() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+}
+
+Cube::Cube() {
+
 }
