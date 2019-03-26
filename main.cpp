@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #include "shape/Triangle.h"
 #include "shape/TextureRect.h"
+#include "shape/Cube.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -67,7 +68,7 @@ int main() {
 
 //    Triangle triangle("../glsldata/trangle_vertex.glsl", "../glsldata/trangle_fragment.glsl");
 
-    TextureRect textureRect("../glsldata/texture_vertex.glsl", "../glsldata/texture_fragment.glsl");
+    Cube textureRect("../glsldata/cube_vertex.glsl", "../glsldata/cube_fragment.glsl");
 
 
     while (!glfwWindowShouldClose(window)){

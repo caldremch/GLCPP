@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 set(IS_MACOS 1)
 
-set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp)
+set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp shape/Cube.cpp shape/Cube.h)
 
 add_executable(GLCPP ${SOURCE_FILES})
 
