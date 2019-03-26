@@ -130,6 +130,10 @@ Cube::Cube(const GLchar *vertexPath, const GLchar *fragmentPath) : Shader(vertex
     //使用glUniform1i设置每个采样器的方式告诉OpenGL每个着色器采样器属于哪个纹理单元
     glUniform1i(glGetUniformLocation(ID, "texture1"), 0);
     setInt("texture2", 1);
+    glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
+    projection = glm::perspective(glm::radians(45.0f), (float) 800 / (float)600.0f, 0.1f, 100.0f);
+    setMat4("projection", projection);
+
 }
 
 void Cube::onRelease() {
@@ -147,25 +151,44 @@ void Cube::use() {
 
     Shader::use();
 
-    glm::mat4 model = glm::mat4(1.0f);//模型矩阵
-    glm::mat4 view = glm::mat4(1.0f);//观察矩阵
-    glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
+//    glm::mat4 model = glm::mat4(1.0f);//模型矩阵
+//    glm::mat4 view = glm::mat4(1.0f);//观察矩阵
+//    glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
 
-    model = glm::rotate(model, (float) glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+//    model = glm::rotate(model, (float) glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
 
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
-    projection = glm::perspective(glm::radians(45.0f), (float) 800 / 600, 0.1f, 100.0f);
-    unsigned int modelLoc = glGetUniformLocation(ID, "model");
-    unsigned int viewLoc = glGetUniformLocation(ID, "view");
+
+
+//    unsigned int modelLoc = glGetUniformLocation(ID, "model");
+//    unsigned int viewLoc = glGetUniformLocation(ID, "view");
     // pass them to the shaders (3 different ways)
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+//    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+//    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
     // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
-    setMat4("projection", projection);
+
+    //camera
+    float radius = 10.0f;
+    float camX = sin(glfwGetTime())*radius;
+    float camZ = cos(glfwGetTime())*radius;
+    glm::mat4 view = glm::mat4(1.0f);//观察矩阵
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    //摄像机位置 , 目标, 上向量
+    view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    setMat4("view", view);
+
 
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    for (int i = 0; i < 10; ++i) {
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, cubePositions[i]);
+        float angle = 20.0f * i;
+        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+        setMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+    }
+
 
 }
 
