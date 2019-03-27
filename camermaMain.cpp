@@ -14,7 +14,7 @@
 #include <bootstrap.h>
 
 
-#define cameraCompile
+//#define cameraCompile
 #ifdef cameraCompile
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -68,7 +68,7 @@ int main() {
 
     glfwMakeContextCurrent(window);
 
-     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
@@ -169,17 +169,17 @@ int main() {
 // load and create a texture
     // -------------------------
     unsigned int texture1, texture2;
-    // texture 1
-    // ---------
+    //texture 1
+    //---------
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
-    // set the texture wrapping parameters
+    //set the texture wrapping parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
+    //set texture filtering parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
+    //load image, create texture and generate mipmaps
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
 
