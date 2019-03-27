@@ -11,8 +11,7 @@
 #include "./utils/Camera.h"
 #include "utils/stb_image.h"
 #include <iostream>
-#include <bootstrap.h>
-
+#include <filesystem>
 
 #define lightCompile
 #ifdef lightCompile
@@ -90,11 +89,11 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
 
-    Shader lightShader("/Users/caldremch/work/Code/C++/GLCPP/glsldata/color_vtx.glsl",
-                       "/Users/caldremch/work/Code/C++/GLCPP/glsldata/color_fgt.glsl");
+    Shader lightShader("E:/CodeProject/OpengGl/GLCPP/glsldata/color_vtx.glsl",
+                       "E:/CodeProject/OpengGl/GLCPP/glsldata/color_fgt.glsl");
 
-    Shader lampShader("/Users/caldremch/work/Code/C++/GLCPP/glsldata/lamp_vtx.glsl",
-                       "/Users/caldremch/work/Code/C++/GLCPP/glsldata/lamp_fgt.glsl");
+    Shader lampShader("E:/CodeProject/OpengGl/GLCPP/glsldata/lamp_vtx.glsl",
+                       "E:/CodeProject/OpengGl/GLCPP/glsldata/lamp_fgt.glsl");
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {

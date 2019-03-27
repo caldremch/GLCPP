@@ -11,7 +11,6 @@
 #include "./utils/Camera.h"
 #include "utils/stb_image.h"
 #include <iostream>
-#include <bootstrap.h>
 
 
 //#define cameraCompile
