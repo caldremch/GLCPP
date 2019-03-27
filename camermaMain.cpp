@@ -13,6 +13,8 @@
 #include <iostream>
 #include <bootstrap.h>
 
+
+//#define cameraCompile
 #ifdef cameraCompile
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -66,7 +68,7 @@ int main() {
 
     glfwMakeContextCurrent(window);
 
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 //    glfwSetCursorPosCallback(window, mouse_callback);
 //    glfwSetScrollCallback(window, scroll_callback);
 
@@ -250,13 +252,13 @@ int main() {
         // activate shader
         shader.use();
 
-        // pass projection matrix to shader (note that in this case it could change every frame)
-//        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-//        shader.setMat4("projection", projection);
-//
-//        // camera/view transformation
-//        glm::mat4 view = camera.GetViewMatrix();
-//        shader.setMat4("view", view);
+//         pass projection matrix to shader (note that in this case it could change every frame)
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        shader.setMat4("projection", projection);
+
+        // camera/view transformation
+        glm::mat4 view = camera.GetViewMatrix();
+        shader.setMat4("view", view);
 
 //        float radius = 10.0f;
 //        float camX = sin(glfwGetTime())*radius;
@@ -267,14 +269,14 @@ int main() {
 //        view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 //        shader.setMat4("view", view);
 
-        glm::mat4 model = glm::mat4(1.0f);//模型矩阵
-        glm::mat4 view = glm::mat4(1.0f);//观察矩阵
-        glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
-
-        model = glm::rotate(model, (float) glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
-
-        shader.setMat4("model", model);
-        shader.setMat4("view", view);
+//        glm::mat4 model = glm::mat4(1.0f);//模型矩阵
+//        glm::mat4 view = glm::mat4(1.0f);//观察矩阵
+//        glm::mat4 projection = glm::mat4(1.0f);//投影矩阵
+//
+//        model = glm::rotate(model, (float) glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+//
+//        shader.setMat4("model", model);
+//        shader.setMat4("view", view);
 
         // render boxes
         glBindVertexArray(VAO);

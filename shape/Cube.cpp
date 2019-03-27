@@ -11,8 +11,12 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-float deltaTimeCube = 0.0f;
-float lastFrameCube = 0.0f;
+
+void framebuffer_size_callback(GLFWwindow *window, int width, int height);
+
+
+void processInput(GLFWwindow *window);
+
 
 Cube::Cube(const GLchar *vertexPath, const GLchar *fragmentPath) : Shader(vertexPath, fragmentPath) {
 
@@ -192,7 +196,12 @@ void Cube::use() {
     view = glm::lookAt(glm::vec3(camX, 0.0f, camZ), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     setMat4("view", view);
 
-
+//    glm::mat4 projection = glm::perspective(glm::radians(camera_ss.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+//    setMat4("projection", projection);
+//
+//    // camera/view transformation
+//    glm::mat4 view = camera_ss.GetViewMatrix();
+//    setMat4("view", view);
 
     //glm::mat4 view = glm::mat4(1);
     //view = glm::lookAt(cameraPos, (cameraPos.operator+=(cameraFront)), cameraUp);
