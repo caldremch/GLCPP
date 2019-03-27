@@ -12,7 +12,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
+#define isCompile
 
+#ifdef isCompile
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
 void processInput(GLFWwindow *window, Cube cube);
@@ -40,7 +42,6 @@ int main() {
 //
 //    std::cout << vec.x << vec.y << vec.z << std::endl;
 //
-//    if (1){ return 0; }
 
     GLFWwindow *window = NULL;
     if (!glfwInit()) {
@@ -112,3 +113,5 @@ void framebuffer_size_callback(GLFWwindow *window, int width, int height) {
 //    std::cout << "改变了:"<< width << "," << height << std::endl;
     glViewport(0, 0, width, height);
 }
+
+#endif

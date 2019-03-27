@@ -11,8 +11,8 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+float deltaTimeCube = 0.0f;
+float lastFrameCube = 0.0f;
 
 Cube::Cube(const GLchar *vertexPath, const GLchar *fragmentPath) : Shader(vertexPath, fragmentPath) {
 
@@ -153,8 +153,8 @@ void Cube::use() {
 
 
     float currentFrame = glfwGetTime();
-    deltaTime = currentFrame - lastFrame;
-    lastFrame = currentFrame;
+    deltaTimeCube = currentFrame - lastFrameCube;
+    lastFrameCube = currentFrame;
 
     //纹理单元GL_TEXTURE0默认总是被激活
     glActiveTexture(GL_TEXTURE0);
@@ -218,7 +218,7 @@ void Cube::handleInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
     }
 
-    float cameraSpeed = 2.5*deltaTime;
+    float cameraSpeed = 2.5*deltaTimeCube;
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {

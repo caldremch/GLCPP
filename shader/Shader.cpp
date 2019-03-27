@@ -134,7 +134,6 @@ void Shader::checkCompileError(GLuint shader, std::string type)
 
 void Shader::use()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(ID);
 }
 

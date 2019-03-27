@@ -105,6 +105,19 @@ public:
 
     }
 
+    // Processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
+    void ProcessKeyboard(Camera_Movement direction, float deltaTime) {
+        float velocity = MovementSpeed * deltaTime;
+        if (direction == FORWARD)
+            Position += Front.operator*=(velocity);
+        if (direction == BACKWARD)
+            Position -= Front.operator*=(velocity);
+        if (direction == LEFT)
+            Position -= Right.operator*=(velocity);
+        if (direction == RIGHT)
+            Position += Right.operator*=(velocity);
+    }
+
 
     // Processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true) {
