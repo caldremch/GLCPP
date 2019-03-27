@@ -14,7 +14,7 @@
 #include <bootstrap.h>
 
 
-//#define cameraCompile
+#define cameraCompile
 #ifdef cameraCompile
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -69,11 +69,11 @@ int main() {
     glfwMakeContextCurrent(window);
 
      glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-//    glfwSetCursorPosCallback(window, mouse_callback);
-//    glfwSetScrollCallback(window, scroll_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
 
     // tell GLFW to capture our mouse
-//    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 // glad: load all OpenGL function pointers
     // ---------------------------------------
@@ -234,7 +234,7 @@ int main() {
 
         // input
         // -----
-//        processInput(window);
+        processInput(window);
 
         // render
         // ------
