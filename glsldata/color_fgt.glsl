@@ -7,6 +7,13 @@ uniform vec3 lightColor;
 
 void main() {
 
+
+    float ambientStrenth = 0.1;
+
+    vec3 ambient  =  ambientStrenth*lightColor;
+
+    vec3 result = ambient * objectColor;
+
     //反射光
-    FragColor = vec4(lightColor*objectColor, 1.0);
+    FragColor = vec4(result, 1.0);
 }
