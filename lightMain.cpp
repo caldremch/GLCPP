@@ -11,7 +11,7 @@
 #include "./utils/Camera.h"
 #include "utils/stb_image.h"
 #include <iostream>
-#include <filesystem>
+#include <boost/filesystem.hpp>
 
 #define lightCompile
 #ifdef lightCompile
@@ -51,6 +51,20 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
 int main() {
 
+
+    boost::filesystem::path execPath = boost::filesystem::current_path();
+    std::string rootPath = execPath.parent_path().string();
+    std::cout << "current Path: " << rootPath << std::endl;
+
+    boost::filesystem::path rp = "glsldata/lighting_vtx.glsl";
+    boost::filesystem::path s = boost::filesystem::complete(rp,execPath.parent_path());
+    boost::filesystem::path s1 = boost::filesystem::system_complete(rp);
+    std::cout << "current Path: " << s.string() << std::endl;
+    std::cout << "current Path s1: " << s1.string() << std::endl;
+
+    if(1)
+        return 0;
+
 // glfw: initialize and configure
     // ------------------------------
     glfwInit();
@@ -87,6 +101,7 @@ int main() {
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
+
 
 
     Shader lightShader("E:/CodeProject/OpengGl/GLCPP/glsldata/lighting_vtx.glsl",

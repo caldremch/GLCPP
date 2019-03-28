@@ -8,6 +8,13 @@ message("is APPLE : ${APPLE}")
 
 set(IS_MACOS 1)
 
+#add boost, component filesystem
+find_package(Boost REQUIRED COMPONENTS filesystem)
+
+if (NOT Boost_FOUND)
+    message("Not found Boost")
+endif ()
+
 set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp shape/Cube.cpp shape/Cube.h utils/Camera.h camermaMain.cpp lightMain.cpp)
 
 add_executable(GLCPP ${SOURCE_FILES})
@@ -27,7 +34,12 @@ if (${APPLE})
     #添加目标链接
     set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 
-    target_link_libraries(GLCPP ${OPENGL_LIBRARY} ${GLEW_LINK} ${GLFW_LINK})
+    target_link_libraries(GLCPP
+            ${OPENGL_LIBRARY}
+            ${GLEW_LINK}
+            ${GLFW_LINK}
+            ${Boost_LIBRARIES}
+            )
 
 
 else ()
@@ -43,9 +55,14 @@ else ()
             ${OPENGL_LIBRARY}
             #D:\\xxx\\ 会报错
             D:/MainProject/OpenGL/windowscore/libs/libglfw3.a
+            ${Boost_LIBRARIES}
     )
 
 endif ()
 
-include_directories(${GLFW_H} ${GLAD_H} ${GLM_H})
+include_directories(${GLFW_H} ${GLAD_H} ${GLM_H} ${Boost_INCLUDE_DIRS})
+
+#show boost
+message("Boost_INCLUDE_DIRS -----> ${Boost_INCLUDE_DIRS}")
+message("Boost_LIBRARIES -----> ${Boost_LIBRARIES}")
 
