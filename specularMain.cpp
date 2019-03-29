@@ -11,10 +11,26 @@
 #include "./utils/Camera.h"
 #include "utils/stb_image.h"
 #include <iostream>
-#include <boost/filesystem.hpp>
+#include "utils/FileUtils.h"
 
-//#define lightCompile
-#ifdef lightCompile
+#define specularCompile
+#ifdef specularCompile
+
+
+std::string getPath(char* path)
+{
+
+
+    char str[10] = "\0";
+
+    char * pathCom = strcat(str, path);
+
+    boost::filesystem::path execPath = boost::filesystem::current_path();
+
+    std::string rootPath = execPath.parent_path().string();
+
+    return boost::filesystem::complete(path,execPath.parent_path()).string();
+}
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 
@@ -52,6 +68,10 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 int main() {
 
 
+    std::string repath = "glsldata/lighting_vtx.glsl";
+
+    getPath("glsldata/lighting_vtx.glsl");
+
     boost::filesystem::path execPath = boost::filesystem::current_path();
     std::string rootPath = execPath.parent_path().string();
     std::cout << "current Path: " << rootPath << std::endl;
@@ -61,6 +81,7 @@ int main() {
     boost::filesystem::path s1 = boost::filesystem::system_complete(rp);
     std::cout << "current Path: " << s.string() << std::endl;
     std::cout << "current Path s1: " << s1.string() << std::endl;
+    std::cout << "current Path getPath: " << getPath("glsldata/lighting_vtx.glsl") << std::endl;
 
 //    if(1)
 //        return 0;
@@ -104,13 +125,14 @@ int main() {
 
 
 
-    Shader lightShader("E:/CodeProject/OpengGl/GLCPP/glsldata/lighting_vtx.glsl",
-                       "E:/CodeProject/OpengGl/GLCPP/glsldata/lighting_fgt.glsl");
-//    Shader lightShader("E:/CodeProject/OpengGl/GLCPP/glsldata/color_vtx.glsl",
-//                       "E:/CodeProject/OpengGl/GLCPP/glsldata/color_fgt.glsl");
+//    Shader lightShader(getPath("glsldata/lighting_vtx.glsl"),getPath("glsldata/lighting_fgt.gls"));
+    Shader lightShader("E:/CodeProject/OpengGl/GLCPP/glsldata/color_vtx.glsl",
+                       "E:/CodeProject/OpengGl/GLCPP/glsldata/color_fgt.glsl");
 
-    Shader lampShader("E:/CodeProject/OpengGl/GLCPP/glsldata/lamp_vtx.glsl",
-                       "E:/CodeProject/OpengGl/GLCPP/glsldata/lamp_fgt.glsl");
+//    Shader lampShader(getPath("glsldata/lamp_vtx.glsl"),getPath("glsldata/lamp_fgt.gls"));
+    Shader lampShader("E:/CodeProject/OpengGl/GLCPP/glsldata/color_vtx.glsl",
+                       "E:/CodeProject/OpengGl/GLCPP/glsldata/color_fgt.glsl");
+
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {

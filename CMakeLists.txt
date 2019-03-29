@@ -15,7 +15,7 @@ if (NOT Boost_FOUND)
     message("Not found Boost")
 endif ()
 
-set(SOURCE_FILES main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp shape/Cube.cpp shape/Cube.h utils/Camera.h camermaMain.cpp lightMain.cpp)
+set(SOURCE_FILES specularMain.cpp main.cpp glad/glad.c shader/Shader.cpp shader/Shader.h shape/Triangle.cpp shape/Triangle.h utils/stb_image.h shape/TextureRect.cpp shape/TextureRect.h utils/stb_image_compile.cpp shape/Cube.cpp shape/Cube.h utils/Camera.h camermaMain.cpp lightMain.cpp utils/FileUtils.h)
 
 add_executable(GLCPP ${SOURCE_FILES})
 
