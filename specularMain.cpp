@@ -21,9 +21,9 @@ std::string getPath(char* path)
 {
 
 
-    char str[10] = "\0";
+   // char str[10] = "\0";
 
-    char * pathCom = strcat(str, path);
+    //char * pathCom = strcat(str, path);
 
     boost::filesystem::path execPath = boost::filesystem::current_path();
 
@@ -68,10 +68,6 @@ glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 int main() {
 
 
-    std::string repath = "glsldata/lighting_vtx.glsl";
-
-    getPath("glsldata/lighting_vtx.glsl");
-
     boost::filesystem::path execPath = boost::filesystem::current_path();
     std::string rootPath = execPath.parent_path().string();
     std::cout << "current Path: " << rootPath << std::endl;
@@ -81,7 +77,15 @@ int main() {
     boost::filesystem::path s1 = boost::filesystem::system_complete(rp);
     std::cout << "current Path: " << s.string() << std::endl;
     std::cout << "current Path s1: " << s1.string() << std::endl;
-    std::cout << "current Path getPath: " << getPath("glsldata/lighting_vtx.glsl") << std::endl;
+    //std::cout << "current Path getPath: " << getPath("glsldata/lighting_vtx.glsl") << std::endl;
+
+
+    if (1)
+        return 0;
+    std::string repath = "glsldata/lighting_vtx.glsl";
+
+    //getPath("glsldata/lighting_vtx.glsl");
+
 
 //    if(1)
 //        return 0;
