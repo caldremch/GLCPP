@@ -10,7 +10,7 @@
 
 namespace FileSystem {
 
-    const std::string getPath(const char *glslFileName) {
+    inline const std::string getPath(const char *glslFileName) {
 
 #ifdef MYMAC
             std::string glslStr = "glsldata/";
