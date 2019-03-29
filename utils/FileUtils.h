@@ -12,15 +12,15 @@ namespace FileSystem {
 
     const std::string getPath(const char *glslFileName) {
 
-//#ifdef MYMAC
-//            const char *glslDir = "glsldata/";
-//#else
-        //           const char *glslDir = "glsldata\\";
-//#endif
+#ifdef MYMAC
+            cstd::string glslStr = "glsldata/";
+#else
+        std::string glslStr = "glsldata\\";
+#endif
 
 
 //            const char *glslDir = "glsldata";
-        std::string glslStr = "glsldata";
+        //std::string glslStr = "glsldata";
 
 
 
@@ -41,7 +41,7 @@ namespace FileSystem {
 
         boost::filesystem::path execPath = boost::filesystem::current_path();
 
-        std::string glslDataRelativePath = glslStr + boost::filesystem::path::preferred_separator + glslFileName;
+        std::string glslDataRelativePath = glslStr  + glslFileName;
 
         std::string rootPath = execPath.parent_path().string();
 
