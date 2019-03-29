@@ -97,6 +97,9 @@ int main() {
     std::string path1 = FileSystem::getPath("color_vtx.glsl");
     std::string path2 = FileSystem::getPath("color_fgt.glsl");
 
+
+    std::cout << "the path = " << path1 << std::endl;
+
     Shader lightShader(path1.c_str(),
                        path2.c_str());
 

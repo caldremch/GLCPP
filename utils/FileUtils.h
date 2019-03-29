@@ -12,19 +12,30 @@ namespace FileSystem {
 
     const std::string getPath(const char *glslFileName) {
 
-        const char *glslDir = "glsldata/";
+//#ifdef MYMAC
+//            const char *glslDir = "glsldata/";
+//#else
+ //           const char *glslDir = "glsldata\\";
+//#endif
 
-        size_t length = sizeof(glslDir);
-        size_t length1 = sizeof(glslFileName);
 
-        size_t total = length+length1+1;
+            const char *glslDir = "glsldata";
+
+
+
+        //size_t length = sizeof(glslDir);
+        //size_t length1 = sizeof(glslFileName);
+
+        //size_t total = length+length1+1;
 
         //std::cout << "length = " << length << std::endl;
+
+            char sep = boost::filesystem::path::preferred_separator;
 
         char p[80] = "\0";
 
         strcat(p, glslDir);
-
+        strcat(p, &sep);
         strcat(p, glslFileName);
 
         //std::cout << "p = " << p << std::endl;
