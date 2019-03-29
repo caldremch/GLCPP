@@ -94,8 +94,8 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
 
-    std::string path1 = FileSystem::getPath("color_vtx.glsl");
-    std::string path2 = FileSystem::getPath("color_fgt.glsl");
+    std::string path1 = FileSystem::getPath("specular_lighting_vtx.glsl");
+    std::string path2 = FileSystem::getPath("specular_lighting_fgt.glsl");
 
 
     std::cout << "the path = " << path1 << std::endl;
