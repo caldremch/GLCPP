@@ -13,8 +13,8 @@
 #include <iostream>
 #include "utils/FileUtils.h"
 
-//#define specularCompile
-#ifdef specularCompile
+#define materialMainCompile
+#ifdef materialMainCompile
 
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
@@ -94,9 +94,8 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
 
-    std::string path1 = FileSystem::getPath("specular_lighting_vtx.glsl");
-    std::string path2 = FileSystem::getPath("specular_lighting_fgt.glsl");
-
+    std::string path1 = FileSystem::getPath("materials_vtx.glsl");
+    std::string path2 = FileSystem::getPath("material_fgt.glsl");
 
     std::cout << "the path = " << path1 << std::endl;
 
@@ -209,9 +208,29 @@ int main() {
 
         // activate shader
         lightShader.use();
-        lightShader.setVec3("objectColor", 1.0f, 0.5, 0.31f);
-        lightShader.setVec3("lightColor", 1.0, 1.0, 1.0f);
-        lightShader.setVec3("lightPos", lightPos);
+        lightShader.setVec3("light.position", lightPos);
+        lightShader.setVec3("viewPos", camera.Position);
+
+
+        //light properties
+        glm::vec3 lightColor;
+        lightColor.x = sin(glfwGetTime()*2.0f);
+        lightColor.y = sin(glfwGetTime()*0.7f);
+        lightColor.z = sin(glfwGetTime()*1.3f);
+
+        glm::vec3 diffuseColor = lightColor * glm::vec3(0.5f); //decrease the influence
+        glm::vec3 ambientColor = lightColor * glm::vec3(0.2f); //low influence
+        lightShader.setVec3("light.ambient", ambientColor);
+        lightShader.setVec3("light.diffuse", diffuseColor);
+        lightShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        //material properties
+        lightShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        lightShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);// specular lighting doesn't have full effect on this object's materical
+        lightShader.setFloat("material.shininess", 32);
+
+
 
 
 
