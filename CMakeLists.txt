@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(GLCPP)
 
+
+#添加编译条件
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 
