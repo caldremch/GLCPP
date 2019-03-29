@@ -6,10 +6,6 @@ project(GLCPP)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-g -Wall")
 
-message("is APPLE : ${APPLE}")
-
-set(IS_MACOS 1)
-
 #add boost, component filesystem
 find_package(Boost REQUIRED COMPONENTS filesystem)
 
@@ -30,15 +26,16 @@ if (${APPLE})
 
     find_package(OpenGL REQUIRED)
     include_directories(${OPENGL_INCLUDE_DIR})
-    find_package(GLUT REQUIRED)
-    include_directories(${GLUT_INCLUDE_DIR})
+
+    # find_package(GLUT REQUIRED)
+   # include_directories(${GLUT_INCLUDE_DIR})
 
     #添加目标链接
     set(GLFW_LINK /usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.dylib)
 
     target_link_libraries(GLCPP
             ${OPENGL_LIBRARY}
-            ${GLEW_LINK}
+            #${GLEW_LINK}
             ${GLFW_LINK}
             ${Boost_LIBRARIES}
             )
@@ -48,6 +45,7 @@ else ()
 
     #windows 环境
     message("oh windows !")
+
     set(GLFW_H D:\\MainProject\\OpenGL\\windowscore\\include)
     set(GLAD_H D:\\MainProject\\OpenGL\\glad\\include)
     find_package(OpenGL REQUIRED)
