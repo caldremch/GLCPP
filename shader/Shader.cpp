@@ -5,7 +5,7 @@
 #include "Shader.h"
 
 
-Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath) {
+Shader::Shader(const char *vertexPath, const char *fragmentPath) {
 
     std::string vertexCode;
     std::string fragmentCode;
@@ -38,6 +38,7 @@ Shader::Shader(const GLchar *vertexPath, const GLchar *fragmentPath) {
     }
     catch (std::ifstream::failure e)
     {
+        std::cout <<"what--->" <<e.what() << std::endl;
         std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ" << std::endl;
     }
 

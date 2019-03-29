@@ -40,7 +40,10 @@ add_executable(GLCPP ${SOURCE_FILES})
 
 #####################################Mac 环境###################################
 if (${APPLE})
+
     message("oh mac os !")
+
+    set(CMAKE_CXX_FLAGS "-DMYMAC")
 
     #add boost, component filesystem
     find_package(Boost REQUIRED COMPONENTS filesystem)
