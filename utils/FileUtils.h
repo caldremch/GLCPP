@@ -13,7 +13,7 @@ namespace FileSystem {
     const std::string getPath(const char *glslFileName) {
 
 #ifdef MYMAC
-            cstd::string glslStr = "glsldata/";
+            std::string glslStr = "glsldata/";
 #else
         std::string glslStr = "glsldata\\";
 #endif
